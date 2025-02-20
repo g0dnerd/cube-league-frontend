@@ -1,13 +1,1 @@
-<h1>Player List:</h1>
-<ul>
-  <li *ngFor="let player of players">{{ player.name }} - {{ player.elo }}</li>
-</ul>
-<ul>
-  <li *ngFor="let cube of cubes">{{ cube.name }} - {{ cube.url }}</li>
-</ul>
-<ul>
-  <li *ngFor="let game of games">
-    Round {{ game.roundNumber }}: {{ game.player1?.player?.name }} vs
-    {{ game.player2?.player?.name }}
-  </li>
-</ul>
+<router-outlet></router-outlet>

@@ -8,6 +8,24 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "targets": {
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "host": "localhost",
+        "port": 4200
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "vault-frontend:build:production"
+        },
+        "development": {
+          "buildTarget": "vault-frontend:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    }
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.1.0",

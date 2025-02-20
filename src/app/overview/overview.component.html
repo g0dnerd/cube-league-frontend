@@ -1,0 +1,28 @@
+<h1>Player List:</h1>
+<table class="standings-table">
+  <thead>
+    <tr>
+      <th style="text-align: center; padding-right: 40px">#</th>
+      <th style="text-align: center; padding-right: 40px">Name</th>
+      <th style="text-align: center; padding-right: 40px">Elo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of players; index as i">
+      <td>{{ i + 1 }}</td>
+      <td>
+        <a routerLink="/players/{{ player.id }}">{{ player.name }}</a>
+      </td>
+      <td>{{ player.elo }}</td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <h2>Time Remaining:</h2>
+  <p>
+    {{ remainingTime.days }} days
+    <span>{{ remainingTime.hours }} hours</span>
+    <span> {{ remainingTime.minutes }} minutes</span>
+    <span> {{ remainingTime.seconds }} seconds</span>
+  </p>
+</div>

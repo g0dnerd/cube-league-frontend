@@ -15,6 +15,8 @@ export interface Game {
   player2Id: number;
   player2?: Enrollment;
   player1?: Enrollment;
+  player1Wins: number;
+  player2Wins: number;
 }
 
 export interface Enrollment {
@@ -27,4 +29,5 @@ export interface Enrollment {
 export interface Draft {
   cubeId: number;
   cube?: Cube;
+  timestamp: string;
 }

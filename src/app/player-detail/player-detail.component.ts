@@ -1,5 +1,6 @@
-import { NgFor } from '@angular/common';
-import { Component, Input, numberAttribute, OnInit } from '@angular/core';
+import { AsyncPipe, NgFor } from '@angular/common';
+import { Component, input, numberAttribute, OnInit } from '@angular/core';
+import { Observable, of, shareReplay } from 'rxjs';
 
 import { EnrollmentService, PlayerService } from '../_services';
 import { Enrollment, Player } from '../_types';
@@ -8,29 +9,27 @@ import { DraftPlayerCardComponent } from '../draft-player-card/draft-player-card
 @Component({
   selector: 'app-player-detail',
   standalone: true,
-  imports: [DraftPlayerCardComponent, NgFor],
+  imports: [AsyncPipe, DraftPlayerCardComponent, NgFor],
   templateUrl: './player-detail.component.html',
   styleUrl: './player-detail.component.css',
 })
 export class PlayerDetailComponent implements OnInit {
-  @Input({ required: true, transform: numberAttribute }) id = 0;
+  id = input(0, { transform: numberAttribute });
 
-  player: Player | null = null;
-  enrollments: Enrollment[] = [];
+  player$: Observable<Player | null> = of(null);
+  enrollments$: Observable<Enrollment[]> = of([]);
 
   constructor(
-    private readonly enrollmentService: EnrollmentService,
     private readonly playerService: PlayerService,
+    private readonly enrollmentService: EnrollmentService,
   ) {}
 
   ngOnInit() {
-    this.playerService.getPlayerById(this.id).subscribe((data) => {
-      this.player = data;
-    });
-    this.enrollmentService
-      .getEnrollmentsByPlayerId(this.id)
-      .subscribe((data) => {
-        this.enrollments = data;
-      });
+    this.player$ = this.playerService
+      .getPlayerById(this.id())
+      .pipe(shareReplay(1));
+    this.enrollments$ = this.enrollmentService.getEnrollmentsByPlayerId(
+      this.id(),
+    );
   }
 }

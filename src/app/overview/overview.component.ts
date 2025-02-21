@@ -1,20 +1,22 @@
-import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, NgFor } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { Player } from '../_types';
 import { PlayerService } from '../_services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-overview',
-  imports: [NgFor, RouterLink],
+  imports: [AsyncPipe, NgFor, RouterLink],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css',
 })
 export class OverviewComponent {
   leagueEnd: number = Date.parse('2025-09-27T10:00:00Z');
 
-  players: Player[] = [];
+  private readonly playerService = inject(PlayerService);
+  players$: Observable<Player[]> = this.playerService.getPlayers();
 
   remainingTime: {
     days: number;
@@ -24,17 +26,15 @@ export class OverviewComponent {
   } = { days: 0, hours: 0, minutes: 0, seconds: 0 };
   timer: any | null = null;
 
-  constructor(private readonly playerService: PlayerService) {}
-
   ngOnInit() {
     this.updateRemainingTime();
     this.timer = setInterval(() => {
       this.updateRemainingTime();
     }, 1000);
+  }
 
-    this.playerService.getPlayers().subscribe((data) => {
-      this.players = data;
-    });
+  ngOnDestroy() {
+    clearInterval(this.timer);
   }
 
   updateRemainingTime() {

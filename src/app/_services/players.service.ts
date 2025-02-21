@@ -16,6 +16,7 @@ export class PlayerService {
   }
 
   getPlayerById(playerId: number): Observable<Player> {
+    console.log('Getting Player with ID', playerId);
     return this.http.get<Player>(`${this.apiUrl}/${playerId}`);
   }
 }

@@ -33,3 +33,8 @@ export interface Draft {
   cube?: Cube;
   timestamp: string;
 }
+
+export interface DraftGames {
+  draft: Draft;
+  games: Game[];
+}

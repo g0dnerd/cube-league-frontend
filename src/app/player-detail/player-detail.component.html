@@ -1,7 +1,15 @@
-<p>{{ player?.name }} (ID {{ player?.id }}) has {{ player?.elo }} Elo.</p>
+<h1>Player profile</h1>
+<p>
+  {{ (player$ | async)?.name }} (ID {{ (player$ | async)?.id }}) has
+  {{ (player$ | async)?.elo }} Elo.
+</p>
 <h2>Match history:</h2>
 <ul>
-  <li *ngFor="let enrollment of enrollments; index as i">
-    <app-draft-player-card [enrollmentId]="enrollment.id" />
+  <li *ngFor="let enrollment of enrollments$ | async; index as i">
+    @defer {
+      <app-draft-player-card [enrollmentId]="enrollment.id" />
+    } @placeholder {
+      Game History
+    }
   </li>
 </ul>

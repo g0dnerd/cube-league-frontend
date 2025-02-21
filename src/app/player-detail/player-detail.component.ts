@@ -28,8 +28,8 @@ export class PlayerDetailComponent implements OnInit {
     this.player$ = this.playerService
       .getPlayerById(this.id())
       .pipe(shareReplay(1));
-    this.enrollments$ = this.enrollmentService.getEnrollmentsByPlayerId(
-      this.id(),
-    );
+    this.enrollments$ = this.enrollmentService
+      .getEnrollmentsByPlayerId(this.id())
+      .pipe(shareReplay(1));
   }
 }

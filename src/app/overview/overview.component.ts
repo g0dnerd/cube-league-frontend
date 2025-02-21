@@ -2,13 +2,8 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { Draft, Enrollment, Game, Player } from '../_types';
-import {
-  DraftService,
-  EnrollmentService,
-  GameService,
-  PlayerService,
-} from '../_services';
+import { Player } from '../_types';
+import { PlayerService } from '../_services';
 
 @Component({
   selector: 'app-overview',
@@ -20,9 +15,6 @@ export class OverviewComponent {
   leagueEnd: number = Date.parse('2025-09-27T10:00:00Z');
 
   players: Player[] = [];
-  drafts: Draft[] = [];
-  enrollments: Enrollment[] = [];
-  games: Game[] = [];
 
   remainingTime: {
     days: number;
@@ -32,12 +24,7 @@ export class OverviewComponent {
   } = { days: 0, hours: 0, minutes: 0, seconds: 0 };
   timer: any | null = null;
 
-  constructor(
-    private readonly playerService: PlayerService,
-    private readonly gameService: GameService,
-    private readonly draftService: DraftService,
-    private readonly enrollmentService: EnrollmentService,
-  ) {}
+  constructor(private readonly playerService: PlayerService) {}
 
   ngOnInit() {
     this.updateRemainingTime();
@@ -47,15 +34,6 @@ export class OverviewComponent {
 
     this.playerService.getPlayers().subscribe((data) => {
       this.players = data;
-    });
-    this.gameService.getGames().subscribe((data) => {
-      this.games = data;
-    });
-    this.draftService.getDrafts().subscribe((data) => {
-      this.drafts = data;
-    });
-    this.enrollmentService.getEnrollments().subscribe((data) => {
-      this.enrollments = data;
     });
   }
 

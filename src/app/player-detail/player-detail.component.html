@@ -1,8 +1,5 @@
-<h1>Player profile</h1>
-<p>
-  {{ (player$ | async)?.name }} (ID {{ (player$ | async)?.id }}) has
-  {{ (player$ | async)?.elo }} Elo.
-</p>
+<h1>{{ (player$ | async)?.name }}</h1>
+<h4>Player profile</h4>
 <h2>Match history:</h2>
 <ul>
   <li *ngFor="let enrollment of enrollments$ | async; index as i">

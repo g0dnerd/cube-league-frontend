@@ -14,4 +14,8 @@ export class DraftService {
   getDrafts(): Observable<Draft[]> {
     return this.http.get<Draft[]>(this.apiUrl);
   }
+
+  getDraftByEnrollment(enrollmentId: number): Observable<Draft> {
+    return this.http.get<Draft>(`${this.apiUrl}/enrollment/${enrollmentId}`);
+  }
 }

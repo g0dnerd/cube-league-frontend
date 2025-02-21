@@ -15,7 +15,7 @@ export class GameService {
     return this.http.get<Game[]>(this.apiUrl);
   }
 
-  getGamesByPlayerId(playerId: number): Observable<Game[]> {
-    return this.http.get<Game[]>(`${this.apiUrl}/player/${playerId}`);
+  getGamesByEnrollment(enrollmentId: number): Observable<Game[]> {
+    return this.http.get<Game[]>(`${this.apiUrl}/enrollment/${enrollmentId}`);
   }
 }

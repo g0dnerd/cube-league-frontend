@@ -20,6 +20,7 @@ export interface Game {
 }
 
 export interface Enrollment {
+  id: number;
   playerId: number;
   player?: Player;
   draftId: number;
@@ -27,6 +28,7 @@ export interface Enrollment {
 }
 
 export interface Draft {
+  id: number;
   cubeId: number;
   cube?: Cube;
   timestamp: string;

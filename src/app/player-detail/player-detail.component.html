@@ -1,7 +1,7 @@
 <p>{{ player?.name }} (ID {{ player?.id }}) has {{ player?.elo }} Elo.</p>
+<h2>Match history:</h2>
 <ul>
-  <li *ngFor="let game of gameHistory; index as i">
-    {{ game.player1?.player?.name }} vs {{ game.player2?.player?.name }}:
-    {{ game.player1Wins }} - {{ game.player2Wins }}
+  <li *ngFor="let enrollment of enrollments; index as i">
+    <app-draft-player-card [enrollmentId]="enrollment.id" />
   </li>
 </ul>

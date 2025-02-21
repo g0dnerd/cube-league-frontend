@@ -14,4 +14,8 @@ export class EnrollmentService {
   getEnrollments(): Observable<Enrollment[]> {
     return this.http.get<Enrollment[]>(this.apiUrl);
   }
+
+  getEnrollmentsByPlayerId(playerId: number): Observable<Enrollment[]> {
+    return this.http.get<Enrollment[]>(`${this.apiUrl}/player/${playerId}`);
+  }
 }

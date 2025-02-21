@@ -1,4 +1,4 @@
-<h4>Draft from {{ draft?.timestamp }}</h4>
+<h5>Draft from {{ draft?.timestamp | date: "yyyy/mm/dd" }}</h5>
 <ul>
   <li *ngFor="let game of games; index as i">
     {{ game.player1?.player?.name }} vs {{ game.player2?.player?.name }}:

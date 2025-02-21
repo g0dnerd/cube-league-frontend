@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { DatePipe, NgFor } from '@angular/common';
 import { Component, Input, numberAttribute, OnInit } from '@angular/core';
 
 import { Draft, Game } from '../_types';
@@ -6,7 +6,7 @@ import { GameService } from '../_services';
 
 @Component({
   selector: 'app-draft-player-card',
-  imports: [NgFor],
+  imports: [DatePipe, NgFor],
   templateUrl: './draft-player-card.component.html',
   styleUrl: './draft-player-card.component.css',
 })
